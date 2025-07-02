@@ -40,8 +40,8 @@ spring.datasource.password=SUA_SENHA
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/Menu-BackEnd.git
-cd Menu-BackEnd
+git clone https://github.com/marcelomoro1/BackendHamburgueria.git
+cd BackendHamburgueria
 
 # Compile e rode os testes
 ./mvnw clean install
