@@ -209,19 +209,6 @@ Content-Type: application/json
 }
 ```
 
----
-
-## 🧑‍💻 Contribuição
-
-Pull requests são bem-vindos! Sinta-se à vontade para abrir issues e sugerir melhorias.
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
-
----
 
 ## 📚 Referências
 
@@ -231,4 +218,3 @@ Este projeto está sob a licença MIT.
 
 ---
 
-> Dúvidas? Abra uma issue ou entre em contato!
