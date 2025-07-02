@@ -220,3 +220,4 @@ Content-Type: application/json
 
 ---
 
+Projeto desenvolvido para fins educacionais.
