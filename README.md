@@ -58,6 +58,8 @@ A API estará disponível em: [http://localhost:8080](http://localhost:8080)
 
 - **JWT Token**: Após login, inclua o token no header `Authorization: Bearer <token>` para acessar rotas protegidas.
 - **Roles**: ADMIN e CLIENTE.
+- Para conseguir a sua JWT secret key execute o JwtKeyGenerator dentro da pasta security e coloque a senha dentro do application properties.
+- app.jwt.secret=################# 
 
 ---
 
