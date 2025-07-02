@@ -1,4 +1,4 @@
-# 🍔 Menu-BackEnd
+# 🍔 BackEnd Hamburgueria
 
 API RESTful para gerenciamento de pedidos, produtos, usuários e carrinho de compras para sistemas de delivery, restaurantes ou lanchonetes. Desenvolvido com Spring Boot 3, Java 17, autenticação JWT, MySQL e boas práticas modernas.
 
