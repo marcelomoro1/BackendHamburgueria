@@ -22,7 +22,7 @@ public class User {
     private String name; // Corresponde ao 'nome' do UserRegisterDTO
 
     @Column(unique = true)
-    private String username; // Assumindo que este campo existe e precisa ser único.
+    private String username; 
 
     @Column(unique = true)
     private String email;
@@ -31,12 +31,10 @@ public class User {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id")) // CORRIGIDO AQUI!
-    @Enumerated(EnumType.STRING) // Armazena o nome da enum como String no banco de dados
-    private Set<Role> roles = new HashSet<>(); // Usa seu Enum Role
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id")) 
+    @Enumerated(EnumType.STRING) 
+    private Set<Role> roles = new HashSet<>(); 
 
-    // Construtor para registro, alinhado com o UserRegisterDTO (nome, email, password)
-    // E adicionando username (que será o email do DTO para consistência)
     public User(String name, String username, String email, String password) {
         this.name = name;
         this.username = username;
