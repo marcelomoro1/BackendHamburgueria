@@ -2,21 +2,19 @@ package com.example.menubackend.controller;
 
 import com.example.menubackend.model.Produto;
 import com.example.menubackend.repository.ProdutoRepository;
-import com.example.menubackend.dto.ProdutoDTO; // Usando o SEU ProdutoDTO existente
-
-import jakarta.validation.Valid; // Para validação dos DTOs
+import com.example.menubackend.dto.ProdutoDTO; 
+import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize; // Para proteger endpoints
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors; // Para mapear listas
-
+import java.util.stream.Collectors;
 @RestController
-@RequestMapping("/api/produtos") // Boas práticas: prefixar com /api
-@CrossOrigin(origins = "*") // Permite requisições de qualquer origem (em desenvolvimento)
+@RequestMapping("/api/produtos")
+@CrossOrigin(origins = "*")
 public class ProdutoController {
 
     private final ProdutoRepository produtoRepository;
@@ -25,50 +23,48 @@ public class ProdutoController {
         this.produtoRepository = produtoRepository;
     }
 
-    // --- Endpoints Públicos ou Acessíveis a Todos (CLIENTE e ADMIN) ---
 
-    @GetMapping // Lista todos os produtos
+    @GetMapping 
     public ResponseEntity<List<ProdutoDTO>> findAll() {
         List<Produto> produtos = produtoRepository.findAll();
         List<ProdutoDTO> produtoDTOs = produtos.stream()
-                .map(this::convertToProdutoDTO) // Converte Entidade para SEU ProdutoDTO
+                .map(this::convertToProdutoDTO) 
                 .collect(Collectors.toList());
         return ResponseEntity.ok(produtoDTOs);
     }
 
-    @GetMapping("/{id}") // Busca produto por ID
+    @GetMapping("/{id}") 
     public ResponseEntity<ProdutoDTO> findById(@PathVariable long id) {
         return produtoRepository.findById(id)
-                .map(this::convertToProdutoDTO) // Converte Entidade para SEU ProdutoDTO
+                .map(this::convertToProdutoDTO) 
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build()); // Retorna 404 se não encontrar
+                .orElse(ResponseEntity.notFound().build()); 
     }
 
-    // --- Endpoints Protegidos (Apenas para ADMIN) ---
 
-    @PostMapping // Cria um novo produto (apenas ADMIN)
-    @PreAuthorize("hasRole('ADMIN')") // Exige ROLE_ADMIN
+
+    @PostMapping 
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProdutoDTO> save(@Valid @RequestBody ProdutoDTO produtoDTO) {
-        // ID deve ser nulo para criação, será gerado pelo banco de dados
+ 
         if (produtoDTO.getId() != null) {
-            return ResponseEntity.badRequest().body(null); // Não deve enviar ID na criação
+            return ResponseEntity.badRequest().body(null); 
         }
-        Produto produto = convertToProdutoEntity(produtoDTO); // Converte SEU ProdutoDTO para Entidade
+        Produto produto = convertToProdutoEntity(produtoDTO); 
         Produto savedProduto = produtoRepository.save(produto);
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToProdutoDTO(savedProduto));
     }
 
-    @PutMapping("/{id}") // Atualiza um produto existente (apenas ADMIN)
-    @PreAuthorize("hasRole('ADMIN')") // Exige ROLE_ADMIN
+    @PutMapping("/{id}") 
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<ProdutoDTO> update(@PathVariable Long id, @Valid @RequestBody ProdutoDTO produtoDTO) {
-        // Garante que o ID do DTO corresponda ao ID do PathVariable
+    
         if (produtoDTO.getId() == null || !produtoDTO.getId().equals(id)) {
             return ResponseEntity.badRequest().build();
         }
 
         return produtoRepository.findById(id)
                 .map(produtoExistente -> {
-                    // Atualiza os campos do produto existente com os dados do DTO
                     produtoExistente.setNome(produtoDTO.getNome());
                     produtoExistente.setDescricao(produtoDTO.getDescricao());
                     produtoExistente.setPreco(produtoDTO.getPreco());
@@ -79,18 +75,16 @@ public class ProdutoController {
                     Produto updatedProduto = produtoRepository.save(produtoExistente);
                     return ResponseEntity.ok(convertToProdutoDTO(updatedProduto));
                 })
-                .orElse(ResponseEntity.notFound().build()); // Retorna 404 se não encontrar
+                .orElse(ResponseEntity.notFound().build()); 
     }
 
-    @DeleteMapping("/{id}") // Deleta um produto (apenas ADMIN)
-    @PreAuthorize("hasRole('ADMIN')") // Exige ROLE_ADMIN
-    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna 204 No Content para exclusão bem-sucedida
+    @DeleteMapping("/{id}") 
+    @PreAuthorize("hasRole('ADMIN')") 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         produtoRepository.deleteById(id);
     }
 
-    // --- Métodos de Conversão (DTO <-> Entity) ---
-    // Converte de Entidade Produto para SEU ProdutoDTO
     private ProdutoDTO convertToProdutoDTO(Produto produto) {
         ProdutoDTO dto = new ProdutoDTO();
         dto.setId(produto.getId());
@@ -103,11 +97,8 @@ public class ProdutoController {
         return dto;
     }
 
-    // Converte de SEU ProdutoDTO para Entidade Produto
     private Produto convertToProdutoEntity(ProdutoDTO dto) {
         Produto produto = new Produto();
-        // ID é definido apenas para operações de atualização ou quando vem do banco
-        // Para criação, não defina o ID, pois ele é autogerado
         if (dto.getId() != null) {
             produto.setId(dto.getId());
         }
