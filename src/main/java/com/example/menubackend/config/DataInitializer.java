@@ -27,7 +27,7 @@ public class DataInitializer {
         return args -> {
             logger.info("Verificando e inicializando dados de produtos e usuários...");
 
-            // 1. Inicializar Usuários (Opcional, mas útil para testes)
+            //Inicializar Usuários
             if (userRepository.count() == 0) {
                 logger.info("Criando usuários iniciais...");
 
@@ -51,7 +51,7 @@ public class DataInitializer {
                 logger.info("Usuários já existem, pulando inicialização de usuários.");
             }
 
-            // 2. Inicializar Produtos
+            // Inicializar Produtos
             if (produtoRepository.count() == 0) {
                 logger.info("Adicionando produtos iniciais ao banco de dados...");
 
@@ -106,7 +106,7 @@ public class DataInitializer {
                 logger.info("Produto '{}' adicionado.", hamburguerKids.getNome());
 
 
-                // --- SOBREMESA (1 tipo) ---
+                // --- SOBREMESA 
                 Produto petitGateau = new Produto();
                 petitGateau.setNome("Petit Gateau com Sorvete");
                 petitGateau.setDescricao("Bolo de chocolate com centro cremoso, servido com uma bola de sorvete de creme.");
@@ -117,7 +117,7 @@ public class DataInitializer {
                 produtoRepository.save(petitGateau);
                 logger.info("Produto '{}' adicionado.", petitGateau.getNome());
 
-                // --- APERITIVO (1 tipo) ---
+                // --- APERITIVO 
                 Produto batataFritaCheddarBacon = new Produto();
                 batataFritaCheddarBacon.setNome("Batata Frita com Cheddar e Bacon");
                 batataFritaCheddarBacon.setDescricao("Porção generosa de batatas fritas crocantes cobertas com queijo cheddar cremoso e pedaços de bacon.");
@@ -128,7 +128,7 @@ public class DataInitializer {
                 produtoRepository.save(batataFritaCheddarBacon);
                 logger.info("Produto '{}' adicionado.", batataFritaCheddarBacon.getNome());
 
-                // --- BEBIDAS (2 tipos) ---
+                // --- BEBIDAS
                 Produto refrigeranteCola = new Produto();
                 refrigeranteCola.setNome("Refrigerante Cola (Lata)");
                 refrigeranteCola.setDescricao("Lata de 350ml de refrigerante sabor cola.");
