@@ -3,13 +3,13 @@ package com.example.menubackend.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data; // Gera getters e setters (getNome(), getEmail(), getPassword())
+import lombok.Data; 
 
 @Data
 public class UserRegisterDTO {
     @NotBlank(message = "O nome não pode estar em branco")
     @Size(min = 3, max = 40, message = "O nome deve ter entre 3 e 40 caracteres")
-    private String nome; // Campo 'nome'
+    private String nome; 
 
     @NotBlank(message = "O email não pode estar em branco")
     @Email(message = "Por favor, forneça um email válido")
