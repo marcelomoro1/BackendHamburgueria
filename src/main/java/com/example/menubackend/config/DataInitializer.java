@@ -1,6 +1,6 @@
 package com.example.menubackend.config;
 
-import com.example.menubackend.model.Categoria; // NOVO IMPORT
+import com.example.menubackend.model.Categoria; 
 import com.example.menubackend.model.Produto;
 import com.example.menubackend.model.Role;
 import com.example.menubackend.model.User;
