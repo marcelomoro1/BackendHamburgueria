@@ -24,9 +24,6 @@ public class Carrinho {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
 
-    // O valorTotal NÃO será mais persistido aqui. Ele será calculado no serviço e no DTO.
-    // private BigDecimal valorTotal; // <--- REMOVA ESTA LINHA SE ELA EXISTIR!
-
     @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemCarrinho> itens = new ArrayList<>();
 }
