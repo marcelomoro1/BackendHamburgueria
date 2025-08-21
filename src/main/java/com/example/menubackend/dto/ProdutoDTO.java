@@ -7,11 +7,11 @@ import java.math.BigDecimal; // Usar BigDecimal para o preço
 
 @Data
 public class ProdutoDTO {
-    private Long id; // Pode ser nulo para criação, preenchido para atualização/resposta
+    private Long id; 
     private String nome;
     private String descricao;
-    private BigDecimal preco; // Tipo de dado correto para moeda
-    private Categoria categoria; // Usar o Enum Categoria
-    private Boolean disponibilidade; // Renomeado de 'status' para clareza
+    private BigDecimal preco; 
+    private Categoria categoria; 
+    private Boolean disponibilidade; 
     private String imagem;
 }
