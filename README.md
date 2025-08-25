@@ -2,6 +2,12 @@
 
 API RESTful para gerenciamento de pedidos, produtos, usuários e carrinho de compras para sistemas de delivery, restaurantes ou lanchonetes. Desenvolvido com Spring Boot 3, Java 17, autenticação JWT, MySQL e boas práticas modernas.
 
+<div align="center">
+
+[![Assista ao vídeo](https://img.youtube.com/vi/Fvgr7o520OI/hqdefault.jpg)](https://www.youtube.com/watch?v=Fvgr7o520OI)
+
+</div>
+
 FRONTEND: https://github.com/marcelomoro1/FrontendHamburgueria
 --- 
 
